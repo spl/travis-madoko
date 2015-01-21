@@ -1,6 +1,5 @@
 env:
   - secure: Ck4/n0WmdkiiKVuNfO/KLBwjw9LAR0ni0rOjM/aSmUh2DZL+p4AmU6gh73Tmb7qOdWXO1Tthn+W7wIHK6fAVGziyE+PDwbkGfhwaa20LvsQdk9vDfT3Ym7iPDIg+0c1yHJTHdIcAZ1L0OGZhr3zWQM1LvzBRlnHd8+nxvT5mzuQ=
-
 language: node_js
 node_js:
 - '0.10'
