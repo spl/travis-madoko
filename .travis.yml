@@ -1,4 +1,4 @@
 script:
   - sudo apt-get install -y npm
   - sudo npm install madoko -g
-  - madoko README.md
+  - madoko doc.md
