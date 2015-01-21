@@ -1,11 +1,12 @@
 dd:
-  secure: Ck4/n0WmdkiiKVuNfO/KLBwjw9LAR0ni0rOjM/aSmUh2DZL+p4AmU6gh73Tmb7qOdWXO1Tthn+W7wIHK6fAVGziyE+PDwbkGfhwaa20LvsQdk9vDfT3Ym7iPDIg+0c1yHJTHdIcAZ1L0OGZhr3zWQM1LvzBRlnHd8+nxvT5mzuQ=
+  secure: CEaUE773a8F5u+9e+qoMwipebXn2LLgrh6Q8y0h0dZ5JyBkUpnJfq+AZSaCIyMvKLpLNsFMESyFu+Wm2I9S2kdIT2BfOnLnlFXfYaX0j8GkXgiemmMzEYKhzE/Slq1nqOiSWNf2UwlsQj8rJw7+lMD+5gs50Hl43JTBAeUDOZfk=
 language: node_js
 node_js:
-  - '0.10'
+- '0.10'
 script:
-  - sudo apt-get install sshpass
-  - npm install madoko -g
-  - madoko doc.md
+- echo $HELLO
+- sudo apt-get install sshpass
+- npm install madoko -g
+- madoko doc.md
 after_success:
-  - sshpass -p "$PASSWD" scp doc.html sg875@users.hszk.bme.hu:public_html/remo/
+- sshpass -p "$PASSWD" scp doc.html sg875@users.hszk.bme.hu:public_html/remo/
