@@ -1,5 +1,4 @@
-dd:
-  secure: CEaUE773a8F5u+9e+qoMwipebXn2LLgrh6Q8y0h0dZ5JyBkUpnJfq+AZSaCIyMvKLpLNsFMESyFu+Wm2I9S2kdIT2BfOnLnlFXfYaX0j8GkXgiemmMzEYKhzE/Slq1nqOiSWNf2UwlsQj8rJw7+lMD+5gs50Hl43JTBAeUDOZfk=
+secure: CEaUE773a8F5u+9e+qoMwipebXn2LLgrh6Q8y0h0dZ5JyBkUpnJfq+AZSaCIyMvKLpLNsFMESyFu+Wm2I9S2kdIT2BfOnLnlFXfYaX0j8GkXgiemmMzEYKhzE/Slq1nqOiSWNf2UwlsQj8rJw7+lMD+5gs50Hl43JTBAeUDOZfk=
 language: node_js
 node_js:
 - '0.10'
