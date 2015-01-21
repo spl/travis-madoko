@@ -8,4 +8,5 @@ script:
 - sudo apt-get install sshpass
 - npm install madoko -g
 - madoko doc.md
-- sshpass -p "$PASSWD" scp doc.html sg875@users.hszk.bme.hu:public_html/remo/
+- sshpass -V
+- sshpass -p $PASSWD scp doc.html sg875@users.hszk.bme.hu:public_html/remo/
