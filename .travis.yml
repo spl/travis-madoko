@@ -2,6 +2,9 @@
 
 language: node_js
 
+env:
+  - DVISVGM_URL=https://github.com/mgieseki/dvisvgm/releases/download/2.6/dvisvgm-2.6.tar.gz
+
 cache:
   directories:
     - $HOME/.dvisvgm
@@ -13,15 +16,8 @@ before_install:
     texlive-latex-extra texlive-generic-extra texlive-math-extra lmodern
 
 install:
-  # Install dvisvgm in a cached directory.
-  - | if [ ! -d $HOME/.dvisvgm ]; then
-        curl -sL https://github.com/mgieseki/dvisvgm/releases/download/2.6/dvisvgm-2.6.tar.gz | tar zx
-        mv dvisvgm-* $HOME/.dvisvgm
-        cd $HOME/.dvisvgm
-        ./configure
-        make
-        sudo make install
-      fi
+  # Install dvisvgm in a cached directory if it doesn't already exist.
+  - sh install-dvisvgm.sh
 
 script:
 - npm install madoko -g
