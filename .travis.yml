@@ -1,11 +1,28 @@
-env:
-  - secure: Ck4/n0WmdkiiKVuNfO/KLBwjw9LAR0ni0rOjM/aSmUh2DZL+p4AmU6gh73Tmb7qOdWXO1Tthn+W7wIHK6fAVGziyE+PDwbkGfhwaa20LvsQdk9vDfT3Ym7iPDIg+0c1yHJTHdIcAZ1L0OGZhr3zWQM1LvzBRlnHd8+nxvT5mzuQ=
+# https://github.com/touist/touist/blob/1b1c2ef709ce906eb2ba581c6ec840746bb884b9/circle.yml
+
 language: node_js
-node_js:
-- '0.10'
+
+cache:
+  directories:
+    - $HOME/.dvisvgm
+
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -y --no-install-recommends libkpathsea-dev \
+    libpotrace-dev curl texlive texlive-xetex texlive-extra-utils \
+    texlive-latex-extra texlive-generic-extra texlive-math-extra lmodern
+
+install:
+  # Install dvisvgm in a cached directory.
+  - | if [ ! -d $HOME/.dvisvgm ]; then
+        curl -sL https://github.com/mgieseki/dvisvgm/releases/download/2.6/dvisvgm-2.6.tar.gz | tar zx
+        mv dvisvgm-* $HOME/.dvisvgm
+        cd $HOME/.dvisvgm
+        ./configure
+        make
+        sudo make install
+      fi
+
 script:
-- sudo apt-get install sshpass
 - npm install madoko -g
 - madoko doc.md
-- sshpass -V
-- sshpass -p $PASSWD scp -oStrictHostKeyChecking=no doc.html sg875@users.hszk.bme.hu:public_html/remo/
