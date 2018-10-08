@@ -35,6 +35,14 @@ install:
       sudo make install
     fi
 
-script:
+  # Check for dvisvgm installation
+  - dvisvgm --version
+
+  # Install madoko
   - npm install madoko -g
+
+  # Check for madoko installation
+  - madoko --version
+
+script:
   - madoko doc.md
