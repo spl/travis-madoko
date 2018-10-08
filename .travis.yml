@@ -19,7 +19,7 @@ before_install:
   - sudo apt-get update -qq
 
   # Install the dependencies for TeXLive and dvisvgm.
-  - sudo apt-get install -qy --no-install-recommends libkpathsea-dev
+  - sudo apt-get install -qq --no-install-recommends libkpathsea-dev
       libpotrace-dev curl texlive texlive-xetex texlive-extra-utils
       texlive-latex-extra texlive-generic-extra texlive-math-extra lmodern
 
