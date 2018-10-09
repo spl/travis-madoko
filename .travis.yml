@@ -32,7 +32,7 @@ before_install:
   - sudo apt-get update -qq
 
   # Install the dependencies for TeXLive and dvisvgm.
-  - sudo apt-get -y --no-install-suggests --no-install-recommends
+  - sudo apt-get install -yq --no-install-suggests --no-install-recommends
       texlive texlive-xetex texlive-extra-utils
       texlive-latex-extra texlive-generic-extra texlive-math-extra
 
