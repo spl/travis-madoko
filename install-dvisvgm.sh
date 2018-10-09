@@ -13,6 +13,7 @@ if [ "$(ls -A $HOME/.dvisvgm)" = "" ]; then
 fi
 
 # This is needed to use the right versions of gcc and g++.
+# See https://gist.github.com/cotsog/19cd36b295e03bdbabdb
 export CC=gcc-4.9 CXX=g++-4.9
 
 # Build (using bundled libraries) and install dvisvgm.

@@ -18,7 +18,9 @@ cache:
 
 addons:
   apt:
-    # Newer gcc/g++: https://docs.travis-ci.com/user/languages/c/#gcc-on-linux
+    # Newer gcc/g++:
+    #   * https://docs.travis-ci.com/user/languages/c/#gcc-on-linux
+    #   * https://gist.github.com/cotsog/19cd36b295e03bdbabdb
     sources:
       - ubuntu-toolchain-r-test
     # Safelist: https://github.com/travis-ci/apt-package-safelist/blob/master/ubuntu-trusty
