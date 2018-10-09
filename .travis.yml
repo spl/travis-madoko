@@ -43,7 +43,8 @@ before_install:
   - travis_apt_get_update
 
   # Install the PPA dependencies for TeXLive and dvisvgm.
-  - sudo -E apt-get -yq --no-install-suggests --no-install-recommends $(travis_apt_get_options) install
+  - travis_retry sudo -E apt-get -yq --no-install-suggests --no-install-recommends
+      $(travis_apt_get_options) install
       libkpathsea-dev texlive texlive-xetex texlive-extra-utils
       texlive-latex-extra texlive-generic-extra texlive-math-extra lmodern
 
