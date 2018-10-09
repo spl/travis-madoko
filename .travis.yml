@@ -24,7 +24,8 @@ addons:
     # Safelist: https://github.com/travis-ci/apt-package-safelist/blob/master/ubuntu-trusty
     packages:
       - curl
-      # Minimum version required for dvisvgm
+      # Minimum gcc and g++ versions required for dvisvgm
+      - gcc-4.9
       - g++-4.9
 
 before_install:
@@ -49,22 +50,21 @@ before_install:
 
 install:
 
-  # Check xelatex installation
+  # Check xelatex version
   - xelatex --version
 
-  # Check gcc installation
+  # Check gcc and g++ versions
   - gcc --version
+  - g++ --version
 
   # Build and install dvisvgm if it isn't already there.
   - sh install-dvisvgm.sh
-
-  # Check dvisvgm installation
   - dvisvgm --version
 
   # Install madoko
   - npm install madoko -g
 
-  # Check madoko installation
+  # Check madoko version
   - madoko --version
 
 script:
