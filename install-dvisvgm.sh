@@ -12,6 +12,6 @@ if [ ! -d $HOME/.dvisvgm ] || [ "$(ls -A $HOME/.dvisvgm)" = "" ]; then
   mv dvisvgm-* $HOME/.dvisvgm
 fi
 
-# Build and install dvisvgm.
+# Build (using bundled libraries) and install dvisvgm.
 cd $HOME/.dvisvgm
-./configure && make && sudo make install
+./configure --enable-bundled-libs && make && sudo make install
