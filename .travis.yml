@@ -18,6 +18,7 @@ addons:
     # Safelist: https://github.com/travis-ci/apt-package-safelist/blob/master/ubuntu-trusty
     packages:
       - curl
+      - gcc-4.9
       - libpotrace-dev
 
 before_install:
