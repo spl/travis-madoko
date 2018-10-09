@@ -11,7 +11,10 @@ cache:
   apt: true
   # Caching directories: https://docs.travis-ci.com/user/caching/#arbitrary-directories
   directories:
+    # dvisvgm build
     - $HOME/.dvisvgm
+    # apt-get package cache: https://stackoverflow.com/a/52446551
+    - $HOME/.aptcache
 
 addons:
   apt:
@@ -20,6 +23,9 @@ addons:
       - curl
 
 before_install:
+
+  # Cached packages: move to apt archive.
+  - if [ -e $HOME/.aptcache/*.deb ]; then sudo mv $HOME/.aptcache/*.deb /var/cache/apt/archives/ fi
 
   # This PPA has a backport of TeXLive 2016 to Ubuntu 14.04 Trusty, which only
   # has packages for TexLive 2013.
@@ -32,6 +38,9 @@ before_install:
   - sudo -E apt-get -yq --no-install-suggests --no-install-recommends $(travis_apt_get_options) install
       libkpathsea-dev texlive texlive-xetex texlive-extra-utils
       texlive-latex-extra texlive-generic-extra texlive-math-extra lmodern
+
+  # Cached packages: copy from apt archive.
+  - cp /var/cache/apt/archives/*deb $HOME/.aptcache/
 
 install:
 
