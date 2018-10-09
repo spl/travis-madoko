@@ -24,16 +24,8 @@ before_install:
       texlive-latex-extra texlive-generic-extra texlive-math-extra lmodern
 
 install:
-  # Create the dvisvgm cached directory if it doesn't already exist.
-  - mkdir -p $HOME/.dvisvgm
-
-  # Download dvisvgm if the directory is empty.
-  - if [ "$(ls -A $HOME/.dvisvgm)" = "" ]; then
-      curl -sL $DVISVGM_URL | tar zx; mv dvisvgm-* $HOME/.dvisvgm
-    fi
-
-  # Build and install dvisvgm.
-  - cd $HOME/.dvisvgm; ./configure && make && sudo make install
+  # Build and install dvisvgm if it isn't already there.
+  - sh install-dvisvgm.sh
 
   # Check for dvisvgm installation
   - dvisvgm --version
