@@ -3,7 +3,7 @@
 set -e
 
 # Download dvisvgm if the directory does not exist or is empty.
-if [ ! -d $HOME/.dvisvgm || "$(ls -A $HOME/.dvisvgm)" = "" ]; then
+if [ ! -d $HOME/.dvisvgm ] || [ "$(ls -A $HOME/.dvisvgm)" = "" ]; then
   # Remove the directory if it exists.
   rm -f $HOME/.dvisvgm
   # Download & uncompress the tar.gz file ($DVISVGM_URL is in .travis.yml).
