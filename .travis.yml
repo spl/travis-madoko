@@ -18,8 +18,6 @@ addons:
     # Safelist: https://github.com/travis-ci/apt-package-safelist/blob/master/ubuntu-trusty
     packages:
       - curl
-      - gcc-4.9
-      - libpotrace-dev
 
 before_install:
 
@@ -39,6 +37,9 @@ install:
 
   # Check xelatex installation
   - xelatex --version
+
+  # Check gcc installation
+  - gcc --version
 
   # Build and install dvisvgm if it isn't already there.
   - sh install-dvisvgm.sh
