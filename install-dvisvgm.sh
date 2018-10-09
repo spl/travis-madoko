@@ -8,7 +8,7 @@ if [ ! -d $HOME/.dvisvgm ] || [ "$(ls -A $HOME/.dvisvgm)" = "" ]; then
   # Remove the directory if it exists.
   rmdir $HOME/.dvisvgm || true
   # Download & uncompress the tar.gz file ($DVISVGM_URL is in .travis.yml).
-  travis_retry curl -sL $DVISVGM_URL | tar zx
+  curl -sL $DVISVGM_URL | tar zx
   # Move the downloaded directory.
   mv dvisvgm-* $HOME/.dvisvgm
 fi
