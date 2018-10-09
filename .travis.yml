@@ -25,7 +25,7 @@ before_install:
 
 install:
   # Create the dvisvgm cached directory if it doesn't already exist.
-  - [ -d $HOME/.dvisvgm ] || mkdir $HOME/.dvisvgm
+  - if [ ! -d $HOME/.dvisvgm ]; then mkdir $HOME/.dvisvgm fi
 
   # Download dvisvgm if the directory is empty.
   - if [ "$(ls -A $HOME/.dvisvgm)" = "" ]; then
