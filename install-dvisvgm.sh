@@ -12,6 +12,9 @@ if [ "$(ls -A $HOME/.dvisvgm)" = "" ]; then
   rm -rf dvisvgm-*
 fi
 
+# This is needed to use the right versions of gcc and g++.
+export CC=gcc-4.9 CXX=g++-4.9
+
 # Build (using bundled libraries) and install dvisvgm.
 cd $HOME/.dvisvgm
 ./configure --enable-bundled-libs && make && sudo make install
