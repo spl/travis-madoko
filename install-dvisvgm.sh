@@ -14,4 +14,4 @@ fi
 
 # Build (using bundled libraries) and install dvisvgm.
 cd $HOME/.dvisvgm
-./autogen.sh && ./configure --enable-bundled-libs && make && sudo make install
+./configure --enable-bundled-libs && make && sudo make install

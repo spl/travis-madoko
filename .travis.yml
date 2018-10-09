@@ -4,7 +4,7 @@
 language: node_js
 
 env:
-  - DVISVGM_URL=https://github.com/mgieseki/dvisvgm/archive/2.6.tar.gz
+  - DVISVGM_URL=https://github.com/mgieseki/dvisvgm/releases/download/2.6/dvisvgm-2.6.tar.gz
 
 cache:
   # Caching packages: https://stackoverflow.com/a/52425687
