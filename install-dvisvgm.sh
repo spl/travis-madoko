@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 
-# Create the dvisvgm cached directory if it doesn't already exist.
-mkdir -p $HOME/.dvisvgm
+set -e
 
-# Download dvisvgm if the directory is empty.
-if [ "$(ls -A $HOME/.dvisvgm)" = "" ]; then
-  # $DVISVGM_URL is defined in .travis.yml.
+# Download dvisvgm if the directory does not exist or is empty.
+if [ ! -d $HOME/.dvisvgm || "$(ls -A $HOME/.dvisvgm)" = "" ]; then
+  # Remove the directory if it exists.
+  rm -f $HOME/.dvisvgm
+  # Download & uncompress the tar.gz file ($DVISVGM_URL is in .travis.yml).
   curl -sL $DVISVGM_URL | tar zx
+  # Move the downloaded directory.
   mv dvisvgm-* $HOME/.dvisvgm
 fi
 
