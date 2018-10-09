@@ -18,9 +18,14 @@ cache:
 
 addons:
   apt:
+    # Newer gcc/g++: https://docs.travis-ci.com/user/languages/c/#gcc-on-linux
+    sources:
+      - ubuntu-toolchain-r-test
     # Safelist: https://github.com/travis-ci/apt-package-safelist/blob/master/ubuntu-trusty
     packages:
       - curl
+      # Minimum version required for dvisvgm
+      - g++-4.9
 
 before_install:
 
