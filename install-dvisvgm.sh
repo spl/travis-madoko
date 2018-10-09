@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-set -e
+# Bash: echo commands, exit on error
+set -x -e
 
 # Download dvisvgm if the directory does not exist or is empty.
 if [ ! -d $HOME/.dvisvgm ] || [ "$(ls -A $HOME/.dvisvgm)" = "" ]; then
