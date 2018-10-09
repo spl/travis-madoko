@@ -26,14 +26,14 @@ before_install:
 install:
   # Install dvisvgm in a cached directory if it doesn't already exist.
   - |
-    if [ ! -d $HOME/.dvisvgm ]; then
-      curl -sL $DVISVGM_URL | tar zx
-      mv dvisvgm-* $HOME/.dvisvgm
-      cd $HOME/.dvisvgm
-      ./configure
-      make
-      sudo make install
+    # Create the directory if it doesn't exist.
+    [ -d $HOME/.dvisvgm ] || mkdir $HOME/.dvisvgm
+    # Download dvisvgm if the directory is empty.
+    if [ "$(ls -A $HOME/.dvisvgm)" = "" ]; then
+      curl -sL $DVISVGM_URL | tar zx; mv dvisvgm-* $HOME/.dvisvgm
     fi
+    # Build dvisvgm
+    cd $HOME/.dvisvgm; ./configure && make && sudo make install
 
   # Check for dvisvgm installation
   - dvisvgm --version
