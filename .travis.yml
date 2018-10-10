@@ -6,7 +6,6 @@ language: node_js
 env:
   global:
     - DVISVGM_URL=https://github.com/mgieseki/dvisvgm/releases/download/2.6/dvisvgm-2.6.tar.gz
-    - secure: "v3MB9EpJtwDN7BHlHuf+8ddEA+JaGjjvyXMsC23G6KrDvDFEZV2oSOx3IztZW0N7cLARDufKiWazkjzX8afkhyOARht8pKCfQL1UL6swFlLrc/uVQXVtfOKBMn5wcBIYsh9VG2gSdYz98yapdDJb1siKFcP/Ki2iWH37NAR21PPnxMMqFyMWS/ZWdBt0hgsEC9zVCaBetov+x+LcKKV8bp4u5n6qKQ0gpjFUYVS7Le0j+ai/AmbaIJCN1ClToEfQsLtE7qKKFof6wOyYpYTgaAGR4Vm2aux+NFeVTZaamHpEQyl2/NAaAxYsb2WQZUYAAdLepGr19n2jrujQOuIRjLBaLUUZA3eTek54lStdjxQZ94pYC5cErr/r8SwYu2wG7ReoQxj/uywW5qWzYKAO/bRi7BZntXpC9WmU9oF0jKGnfE23P1Y9FRweuGz/CrROA5T+z6y2gl6uqtt1bLcbEQTy2lmA570dcpe54+vz/PqpNMVptd3HK8VS5DizBf8UcOCYHIRN6qfpWGsdI9/pXnt4uq5GHOzMZy+eHpWv2SefcFjFEmyuJb2psujqImp5jpKVnqJcHs0u7sijF6cNhBKlnCCoY+KKwGcXb+Zo/D4bAjumJ6KxXaDUvPLKDcU1LTEB8FikMUVt9r0CcnOImzznTGzOqT2ULexaKHd4kS4="
 
 cache:
   # Caching directories: https://docs.travis-ci.com/user/caching/#arbitrary-directories
@@ -38,7 +37,6 @@ before_install:
   - travis_retry sudo -E apt-get -yq --no-install-suggests --no-install-recommends
       $(travis_apt_get_options) install -f
       curl
-      sendmail heirloom-mailx
       python3-dev python3-pip
       gcc-4.9 g++-4.9
       libkpathsea-dev texlive texlive-xetex texlive-extra-utils
@@ -70,9 +68,6 @@ script:
 
   # Run madoko
   - madoko --pdf -vv --odir=out doc.md
-
-  # Email PDF
-  - echo "" | mailx -s "travis-madoko pdf" -a out/doc.pdf "$MAILX_DST"
 
   # Send PDF to send.firefox.com
   - send-cli out/doc.pdf
