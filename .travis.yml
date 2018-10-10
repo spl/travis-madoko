@@ -51,7 +51,7 @@ install:
 
   # Install Python client for send.firefox.com
   - sudo pip3 install --upgrade setuptools
-  - pip3 install sendclient
+  - sudo pip3 install sendclient
 
   # Check xelatex version
   - xelatex --version
