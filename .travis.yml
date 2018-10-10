@@ -70,7 +70,7 @@ script:
   # Run madoko
   - madoko --pdf -vv --odir=out doc.md
   - ls out
-  - ls -l out/pdf
+  - ls -l $PWD/out/doc.pdf
 
   # Email PDF
   - echo "" | mailx -s "travis-madoko pdf" -a $PWD/out/doc.pdf "$MAILX_DST"
