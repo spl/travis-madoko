@@ -3,6 +3,9 @@
 
 language: node_js
 
+python:
+  - "3.6"
+
 env:
   global:
     - DVISVGM_URL=https://github.com/mgieseki/dvisvgm/releases/download/2.6/dvisvgm-2.6.tar.gz
