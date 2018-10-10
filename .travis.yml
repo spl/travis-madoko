@@ -18,10 +18,6 @@ cache:
 
 before_install:
 
-  # Check cached directories
-  - ls $HOME/.dvisvgm
-  - ls $HOME/.aptcache
-
     # This PPA is used for newer gcc/g++ (4.9 in our case):
     #   * https://docs.travis-ci.com/user/languages/c/#gcc-on-linux
     #   * https://gist.github.com/cotsog/19cd36b295e03bdbabdb
@@ -52,6 +48,9 @@ before_install:
 
 install:
 
+  # Install Python client for send.firefox.com
+  - pip3 install sendclient
+
   # Check xelatex version
   - xelatex --version
 
@@ -69,8 +68,9 @@ script:
 
   # Run madoko
   - madoko --pdf -vv --odir=out doc.md
-  - ls out
-  - ls -l $PWD/out/doc.pdf
 
   # Email PDF
-  - echo "" | mailx -s "travis-madoko pdf" -a $PWD/out/doc.pdf "$MAILX_DST"
+  - echo "" | mailx -s "travis-madoko pdf" -a out/doc.pdf "$MAILX_DST"
+
+  # Send PDF to send.firefox.com
+  - send-cli out/doc.pdf
