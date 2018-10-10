@@ -73,4 +73,4 @@ script:
   - ls -l $PWD/out/doc.pdf
 
   # Email PDF
-  - echo "" | mailx -s "travis-madoko pdf" -a $PWD/out/doc.pdf "$MAILX_DST"
+  - echo "" | sudo mailx -s "travis-madoko pdf" -a $PWD/out/doc.pdf "$MAILX_DST"
