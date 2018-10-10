@@ -61,10 +61,6 @@ install:
   # Check xelatex version
   - xelatex --version
 
-  # Check gcc and g++ versions
-  - gcc --version
-  - g++ --version
-
   # Build and install dvisvgm if it isn't already there.
   - sh install-dvisvgm.sh
   - dvisvgm --version
