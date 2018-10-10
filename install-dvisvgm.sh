@@ -17,7 +17,10 @@ if [ "$(ls -A $HOME/.dvisvgm)" = "" ]; then
   # See https://gist.github.com/cotsog/19cd36b295e03bdbabdb
   export CC=gcc-4.9 CXX=g++-4.9
 
-  # Build (using bundled libraries) and install dvisvgm.
-  ./configure --enable-bundled-libs && make && sudo make install
+  # Configure using bundled libraries and build.
+  ./configure --enable-bundled-libs && make
 
 fi
+
+# Install dvisvgm.
+sudo make install
