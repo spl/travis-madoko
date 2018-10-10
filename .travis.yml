@@ -48,7 +48,7 @@ before_install:
   # Update package repositories.
   - travis_apt_get_update
 
-  # Cached packages: install with dpkg.
+  # Cached packages: install with dpkg: https://unix.stackexchange.com/a/159114
   - if [ -e $HOME/.aptcache/*.deb ]; then sudo dpkg -i $HOME/.aptcache/*.deb; fi
 
   # Install the PPA dependencies for TeXLive and dvisvgm.
