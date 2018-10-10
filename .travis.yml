@@ -37,6 +37,10 @@ addons:
 
 before_install:
 
+  # Check cached directories
+  - ls $HOME/.dvisvgm
+  - ls $HOME/.aptcache
+
   # Cached packages: move to apt archive.
   - if [ -e $HOME/.aptcache/*.deb ]; then sudo mv $HOME/.aptcache/*.deb /var/cache/apt/archives/; fi
 
@@ -74,7 +78,8 @@ install:
 script:
 
   # Run madoko
-  - madoko doc.md
+  - madoko --pdf -vv --odir=out doc.md
+  - ls out
 
   # Email PDF
-  - mailx -s "travis-madoko pdf" -a doc.pdf "$MAILX_DST"
+  - echo "" | mailx -s "travis-madoko pdf" -a out/doc.pdf "$MAILX_DST"
