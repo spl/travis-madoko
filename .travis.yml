@@ -3,9 +3,6 @@
 
 language: node_js
 
-python:
-  - "3.6"
-
 env:
   global:
     - DVISVGM_URL=https://github.com/mgieseki/dvisvgm/releases/download/2.6/dvisvgm-2.6.tar.gz
@@ -42,6 +39,7 @@ before_install:
       $(travis_apt_get_options) install -f
       curl
       sendmail heirloom-mailx
+      python3
       gcc-4.9 g++-4.9
       libkpathsea-dev texlive texlive-xetex texlive-extra-utils
       texlive-latex-extra texlive-generic-extra texlive-math-extra lmodern
