@@ -9,8 +9,6 @@ env:
     - secure: "v3MB9EpJtwDN7BHlHuf+8ddEA+JaGjjvyXMsC23G6KrDvDFEZV2oSOx3IztZW0N7cLARDufKiWazkjzX8afkhyOARht8pKCfQL1UL6swFlLrc/uVQXVtfOKBMn5wcBIYsh9VG2gSdYz98yapdDJb1siKFcP/Ki2iWH37NAR21PPnxMMqFyMWS/ZWdBt0hgsEC9zVCaBetov+x+LcKKV8bp4u5n6qKQ0gpjFUYVS7Le0j+ai/AmbaIJCN1ClToEfQsLtE7qKKFof6wOyYpYTgaAGR4Vm2aux+NFeVTZaamHpEQyl2/NAaAxYsb2WQZUYAAdLepGr19n2jrujQOuIRjLBaLUUZA3eTek54lStdjxQZ94pYC5cErr/r8SwYu2wG7ReoQxj/uywW5qWzYKAO/bRi7BZntXpC9WmU9oF0jKGnfE23P1Y9FRweuGz/CrROA5T+z6y2gl6uqtt1bLcbEQTy2lmA570dcpe54+vz/PqpNMVptd3HK8VS5DizBf8UcOCYHIRN6qfpWGsdI9/pXnt4uq5GHOzMZy+eHpWv2SefcFjFEmyuJb2psujqImp5jpKVnqJcHs0u7sijF6cNhBKlnCCoY+KKwGcXb+Zo/D4bAjumJ6KxXaDUvPLKDcU1LTEB8FikMUVt9r0CcnOImzznTGzOqT2ULexaKHd4kS4="
 
 cache:
-  # Caching packages: https://stackoverflow.com/a/52425687
-  apt: true
   # Caching directories: https://docs.travis-ci.com/user/caching/#arbitrary-directories
   directories:
     # dvisvgm build
@@ -18,47 +16,39 @@ cache:
     # apt-get package cache: https://stackoverflow.com/a/52446551
     - $HOME/.aptcache
 
-addons:
-  apt:
-    # Newer gcc/g++:
-    #   * https://docs.travis-ci.com/user/languages/c/#gcc-on-linux
-    #   * https://gist.github.com/cotsog/19cd36b295e03bdbabdb
-    sources:
-      - ubuntu-toolchain-r-test
-    # Safelist: https://github.com/travis-ci/apt-package-safelist/blob/master/ubuntu-trusty
-    packages:
-      # For downloading dvisvgm
-      - curl
-      # Minimum gcc and g++ versions required for dvisvgm
-      - gcc-4.9
-      - g++-4.9
-      # For emailing PDF
-      - heirloom-mailx
-
 before_install:
 
   # Check cached directories
   - ls $HOME/.dvisvgm
   - ls $HOME/.aptcache
 
+    # This PPA is used for newer gcc/g++ (4.9 in our case):
+    #   * https://docs.travis-ci.com/user/languages/c/#gcc-on-linux
+    #   * https://gist.github.com/cotsog/19cd36b295e03bdbabdb
+  - sudo -E apt-add-repository -y "ppa:ubuntu-toolchain-r/test"
+
   # This PPA has a backport of TeXLive 2016 to Ubuntu 14.04 Trusty, which only
   # has packages for TexLive 2013.
-  - sudo -E add-apt-repository -y ppa:jonathonf/texlive-2016
+  - sudo -E apt-add-repository -y "ppa:jonathonf/texlive-2016"
 
   # Update package repositories.
   - travis_apt_get_update
 
-  # Cached packages: install with dpkg: https://unix.stackexchange.com/a/159114
+  # Cached packages: restore by installing with dpkg:
+  # https://unix.stackexchange.com/a/159114
   - if [ "$(ls -A $HOME/.aptcache)" != "" ]; then sudo dpkg -i $HOME/.aptcache/*.deb; fi
 
   # Install the PPA dependencies for TeXLive and dvisvgm.
   - travis_retry sudo -E apt-get -yq --no-install-suggests --no-install-recommends
       $(travis_apt_get_options) install -f
+      curl
+      heirloom-mailx
+      gcc-4.9 g++-4.9
       libkpathsea-dev texlive texlive-xetex texlive-extra-utils
       texlive-latex-extra texlive-generic-extra texlive-math-extra lmodern
 
   # Cached packages: copy from apt archive.
-  - cp /var/cache/apt/archives/*deb $HOME/.aptcache/
+  - cp /var/cache/apt/archives/*.deb $HOME/.aptcache/
 
 install:
 
@@ -80,6 +70,7 @@ script:
   # Run madoko
   - madoko --pdf -vv --odir=out doc.md
   - ls out
+  - ls -l out/pdf
 
   # Email PDF
-  - echo "" | mailx -s "travis-madoko pdf" -a out/doc.pdf "$MAILX_DST"
+  - echo "" | mailx -s "travis-madoko pdf" -a $PWD/out/doc.pdf "$MAILX_DST"
