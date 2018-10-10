@@ -41,9 +41,6 @@ before_install:
   - ls $HOME/.dvisvgm
   - ls $HOME/.aptcache
 
-  # Cached packages: move to apt archive.
-  - if [ -e $HOME/.aptcache/*.deb ]; then sudo mv $HOME/.aptcache/*.deb /var/cache/apt/archives/; fi
-
   # This PPA has a backport of TeXLive 2016 to Ubuntu 14.04 Trusty, which only
   # has packages for TexLive 2013.
   - sudo -E add-apt-repository -y ppa:jonathonf/texlive-2016
@@ -51,9 +48,12 @@ before_install:
   # Update package repositories.
   - travis_apt_get_update
 
+  # Cached packages: install with dpkg.
+  - if [ -e $HOME/.aptcache/*.deb ]; then sudo dpkg -i $HOME/.aptcache/*.deb; fi
+
   # Install the PPA dependencies for TeXLive and dvisvgm.
   - travis_retry sudo -E apt-get -yq --no-install-suggests --no-install-recommends
-      $(travis_apt_get_options) install
+      $(travis_apt_get_options) install -f
       libkpathsea-dev texlive texlive-xetex texlive-extra-utils
       texlive-latex-extra texlive-generic-extra texlive-math-extra lmodern
 
