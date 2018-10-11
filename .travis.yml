@@ -31,7 +31,7 @@ before_install:
 
   # Cached packages: restore by installing with dpkg:
   # https://unix.stackexchange.com/a/159114
-  - cd $HOME/.aptcache; if [ "$(ls -A)" != "" ]; then sudo dpkg -i *.deb; fi
+  - (cd $HOME/.aptcache; if [ "$(ls -A)" != "" ]; then sudo dpkg -i *.deb; fi)
 
   # Install package dependencies. We install all packages here instead of using
   # the travis.yml apt mechanism because the latter does not seem to add any
