@@ -54,7 +54,7 @@ install:
   - sudo pip3 install sendclient
 
   # Check xelatex version
-  - xelatex --version | head -1 | grep "(TeX Live 2016)"
+  - xelatex --version | tee /dev/stderr | head -1 | grep "TeX Live 2016" > /dev/null
 
   # Build and install dvisvgm if it isn't already there.
   - sh install-dvisvgm.sh
