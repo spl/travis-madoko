@@ -23,5 +23,8 @@ if [ "$(ls -A)" = "" ]; then
 
 fi
 
-# Install dvisvgm.
+# Install.
 sudo make install
+
+# Check version.
+[ "$(dvisvgm --version)" = "dvisvgm 2.6" ]

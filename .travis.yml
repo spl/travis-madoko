@@ -31,9 +31,11 @@ before_install:
 
   # Cached packages: restore by installing with dpkg:
   # https://unix.stackexchange.com/a/159114
-  - if [ "$(ls -A $HOME/.aptcache)" != "" ]; then sudo dpkg -i $HOME/.aptcache/*.deb; fi
+  - cd $HOME/.aptcache; if [ "$(ls -A)" != "" ]; then sudo dpkg -i *.deb; fi
 
-  # Install the PPA dependencies for TeXLive and dvisvgm.
+  # Install package dependencies. We install all packages here instead of using
+  # the travis.yml apt mechanism because the latter does not seem to add any
+  # benefit such as caching.
   - travis_retry sudo -E apt-get -yq --no-install-suggests --no-install-recommends
       $(travis_apt_get_options) install -f
       curl
@@ -47,16 +49,15 @@ before_install:
 
 install:
 
-  # Install Python client for send.firefox.com
+  # Install client for send.firefox.com. It requires an updated setuptools.
   - sudo pip3 install --upgrade setuptools
   - sudo pip3 install sendclient
 
   # Check xelatex version
-  - xelatex --version
+  - xelatex --version | head -1 | grep "(TeX Live 2016)"
 
   # Build and install dvisvgm if it isn't already there.
   - sh install-dvisvgm.sh
-  - dvisvgm --version
 
   # Install madoko
   - npm install madoko -g
