@@ -27,4 +27,4 @@ fi
 sudo make install
 
 # Check version.
-[ "$(dvisvgm --version)" = "dvisvgm 2.6" ]
+[ "$(dvisvgm --version)" = "dvisvgm $DVISVGM_VERSION" ]

@@ -5,7 +5,8 @@ language: node_js
 
 env:
   global:
-    - DVISVGM_URL=https://github.com/mgieseki/dvisvgm/releases/download/2.6/dvisvgm-2.6.tar.gz
+    - DVISVGM_VERSION=2.6.1
+    - DVISVGM_URL=https://github.com/mgieseki/dvisvgm/releases/download/$DVISVGM_VERSION/dvisvgm-$DVISVGM_VERSION.tar.gz
 
 cache:
   # Caching directories: https://docs.travis-ci.com/user/caching/#arbitrary-directories
