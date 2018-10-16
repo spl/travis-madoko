@@ -14,10 +14,6 @@ if [ "$(ls -A)" = "" ]; then
   mv dvisvgm-*/* .
   rm -rf dvisvgm-*
 
-  # This is needed to use the right versions of gcc and g++.
-  # See https://gist.github.com/cotsog/19cd36b295e03bdbabdb
-  export CC=gcc-4.9 CXX=g++-4.9
-
   # Configure using bundled libraries and build.
   ./configure --enable-bundled-libs && make
 

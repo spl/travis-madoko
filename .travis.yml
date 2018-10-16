@@ -18,11 +18,6 @@ cache:
 
 before_install:
 
-    # This PPA is used for newer gcc/g++ (4.9 in our case):
-    #   * https://docs.travis-ci.com/user/languages/c/#gcc-on-linux
-    #   * https://gist.github.com/cotsog/19cd36b295e03bdbabdb
-  - sudo -E apt-add-repository -y "ppa:ubuntu-toolchain-r/test"
-
   # This PPA has a backport of TeXLive 2016 to Ubuntu 14.04 Trusty, which only
   # has packages for TexLive 2013.
   - sudo -E apt-add-repository -y "ppa:jonathonf/texlive-2016"
@@ -41,7 +36,6 @@ before_install:
       $(travis_apt_get_options) install -f
       curl
       python3-dev python3-pip
-      gcc-4.9 g++-4.9
       libkpathsea-dev texlive texlive-xetex texlive-extra-utils
       texlive-latex-extra texlive-generic-extra texlive-math-extra lmodern
 
